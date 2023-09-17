@@ -18,11 +18,11 @@
     - name : "create docker img "
       command : docker build -t ansible-img .
     
-    - name : "create tag docker img "
-      command : docker tag ansible-img agamista/project-web-img
+    # - name : "create tag docker img "
+    #   command : docker tag ansible-img agamista/project-web-img
 
-    - name : "push docker img "
-      command : docker push agamista/project-web-img
+    # - name : "push docker img "
+    #   command : docker push agamista/project-web-img
 
     - name : "create container from ansible-img"
       command : docker run -d --name ansible-cont -p 8000:80 ansible-img 
