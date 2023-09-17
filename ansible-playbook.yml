@@ -1,0 +1,28 @@
+--- 
+- name : "create docker with ansible"
+  hosts : localhost 
+
+  tasks:
+    - name : "stop docker container "
+      command : docker stop ansible-cont 
+      ignore_errors : yes
+
+    - name : "remove docker container "
+      command : docker rm ansible-cont 
+      ignore_errors : yes
+    
+    - name : "remove docker img "
+      command : docker rmi ansible-img
+      ignore_errors : yes
+
+    - name : "create docker img "
+      command : docker build -t ansible-img .
+    
+    - name : "create tag docker img "
+      command : docker tag ansible-img agamista/project-web-img
+
+    - name : "push docker img "
+      command : docker push agamista/project-web-img
+
+    - name : "create container from ansible-img"
+      command : docker run -d --name ansible-cont -p 8000:80 ansible-img 
